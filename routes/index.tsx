@@ -1,20 +1,16 @@
 /** @jsx h */
 import { h } from "preact";
-import { tw } from "@twind";
 import Counter from "../islands/Counter.tsx";
+import PageWrapper from "../components/PageWrapper.tsx";
+import Content from "../components/Content.tsx";
 
 export default function Home() {
   return (
-    <div class={tw`p-4 mx-auto max-w-screen-md`}>
-      <img
-        src="/logo.svg"
-        height="100px"
-        alt="the fresh logo: a sliced lemon dripping with juice"
-      />
-      <p class={tw`my-6`}>
-        My first deno/fresh project!!
-      </p>
+    <PageWrapper>
+      <Content>
+        Let's count!
+      </Content>
       <Counter start={3} />
-    </div>
+    </PageWrapper>
   );
 }
