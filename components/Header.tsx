@@ -2,7 +2,7 @@
 import { h } from "preact";
 import { tw } from "@twind";
 
-export default function Header() {
+const Header = () => {
     return (
       <span class={tw`flex gap-2 w-full`}>
         <img
@@ -14,3 +14,5 @@ export default function Header() {
       </span>
     );
 }
+
+export default Header;

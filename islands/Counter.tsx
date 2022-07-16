@@ -8,7 +8,7 @@ interface CounterProps {
   start: number;
 }
 
-export default function Counter(props: CounterProps) {
+const Counter = (props: CounterProps) => {
   const [count, setCount] = useState(props.start);
   const btn = (bgColor: string) => tw`bg-${bgColor}-500 flex-grow-1 px-2 py-1 border(gray-100 1) hover:bg-${bgColor}-600 rounded-md font-bold text-2xl hover:text-gray-200`;
   return (
@@ -31,3 +31,5 @@ export default function Counter(props: CounterProps) {
     </div>
   );
 }
+
+export default Counter;
