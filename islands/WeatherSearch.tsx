@@ -7,11 +7,14 @@ import {FormType} from "../schema/Form.ts";
 
 // TODO add more fields so FormType contains unit and other parameters
 // TODO Fix the issue with the temperature number
-const fetchWeatherData = async (city: FormType = "London", unit: string = "metric"): Promise<WeatherDataType | null> => {
+const fetchWeatherData = async (
+    apiKey?: string,
+    city: FormType = "London",
+    unit: string = "metric"
+): Promise<WeatherDataType | null> => {
     try {
-        const apiKey = Deno.env.get("WEATHER_API_KEY");
-
         if (!apiKey) {
+            console.error("API key not found");
             return null;
         }
 
@@ -24,20 +27,24 @@ const fetchWeatherData = async (city: FormType = "London", unit: string = "metri
 
         return WeatherData.parse(json);
     } catch (e) {
-        console.error("JSON parse failed");
+        console.error("API fetch or parse failed");
         console.error(e);
         return null;
     }
 }
 
-const WeatherSearch = () => {
+type WeatherSearchProps = {
+    apiKey: string | null | undefined;
+}
+
+const WeatherSearch = ({ apiKey }: WeatherSearchProps) => {
    const [data, setData] = useState<WeatherDataType>(null);
     const [submitting, setSubmitting] = useState(false);
 
     return <div>
         <Searcher handleSubmit={async (formData) => {
             setSubmitting(true);
-            const resp = await fetchWeatherData(formData);
+            const resp = await fetchWeatherData(apiKey, formData);
             setSubmitting(false);
             if (!resp) {
                 console.error("No data found");
